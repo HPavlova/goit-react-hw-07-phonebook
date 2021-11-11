@@ -3,12 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import propTypes from 'prop-types';
 import styles from './ContactForm.module.css';
 
-import { addContact } from '../../redux/contacts/contacts-operations';
-import { getVisibleContacts } from '../../redux/contacts/contacts-selectors';
+import { addContact, getVisibleContacts } from '../../redux/contacts';
 
 function ContactForm() {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const contacts = useSelector(getVisibleContacts);
 
   const dispatch = useDispatch();
@@ -21,8 +20,8 @@ function ContactForm() {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
 
       default:
@@ -37,11 +36,11 @@ function ContactForm() {
     if (searchSameName) {
       alert(`${name} is already in contacts`);
     } else {
-      dispatch(addContact(name, number));
+      dispatch(addContact({ name, phone }));
     }
 
     setName('');
-    setNumber('');
+    setPhone('');
   };
 
   return (
@@ -64,11 +63,11 @@ function ContactForm() {
         <input
           className={styles.ContactForm__input}
           type="tel"
-          name="number"
+          name="phone"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
           title="Номер телефона должен состоять цифр и может содержать пробелы, тире, круглые скобки и может начинаться с +"
           required
-          value={number}
+          value={phone}
           onChange={handleChange}
         />
       </label>
@@ -83,7 +82,7 @@ ContactForm.propTypes = {
   handleChange: propTypes.func,
   handleSubmit: propTypes.func,
   name: propTypes.string,
-  number: propTypes.string,
+  phone: propTypes.string,
 };
 
 export default ContactForm;

@@ -2,8 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import propTypes from 'prop-types';
 import styles from './Filter.module.css';
 
-import { getFilter } from '../../redux/contacts/contacts-selectors';
-import { changeFilter } from '../../redux/contacts/contacts-actions';
+import { getFilter, changeFilter } from '../../redux/contacts';
 
 const Filter = () => {
   const value = useSelector(getFilter);
