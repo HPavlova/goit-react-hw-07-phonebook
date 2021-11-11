@@ -1,4 +1,8 @@
-export * from './contacts-actions';
-export * from './contacts-operations';
+export { changeFilter } from './contacts-actions';
+export { fetchContact, addContact, deleteContact } from './contacts-operations';
 export * from './contacts-reducer';
-export * from './contacts-selectors';
+export {
+  getFilter,
+  getLoading,
+  getVisibleContacts,
+} from './contacts-selectors';
